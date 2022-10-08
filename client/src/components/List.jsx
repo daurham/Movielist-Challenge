@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 import Movie from './Movie';
 
-const List = ({ movies }) => {
+const List = ({ movies, rerender }) => {
   return (
     <div>
-      {movies.map((movie) => (
-        <Movie movie={movie} />
+      {movies.map((movie, i) => (
+        <Movie key={i} movie={movie} rerender={rerender} />
       ))}
     </div>
   )

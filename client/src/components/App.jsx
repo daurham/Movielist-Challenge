@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import List from './List';
 
@@ -9,11 +9,16 @@ const App = () => {
   const getMovies = async () => {
     try {
       const movies = (await axios.get('/movies')).data;
-      setMovies(() => [...movies]);
+      setMovies([...movies]);
     } catch (err) {
       console.error('Error in Get Movies:', err);
     }
   };
+
+  const postMovie = async () => {
+    await axios.post('/movie/post', { title: input });
+    getMovies();
+  }
 
   useEffect(() => {
     getMovies();
@@ -23,8 +28,8 @@ const App = () => {
     <div>
       <h1>MOVIE LIST KING</h1>
       <input type={'text'} onChange={(e) => setInput(e.target.value)}></input>
-      <button onClick={() => axios.post('/movies/post', { title: input })}>Add</button>
-      <List movies={movies} />
+      <button onClick={() => postMovie()}>Add</button>
+      <List movies={movies} rerender={getMovies} />
     </div>
   );
 }

@@ -1,19 +1,26 @@
-import react, { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, rerender }) => {
+  console.log('MOVIE: ', movie);
   const { title, id } = movie;
   const [input, setInput] = useState(title);
 
-  const updateMovie = () => axios.patch('/movie/update', { title, id });
-  const deleteMovie = () => axios.delete('/movie/delete', { title, id });
+  const updateMovie = async () => {
+    await axios.patch('/movie/update', { title: input, id });
+    rerender();
+  };
+  const deleteMovie = async () => {
+    await axios.delete('/movie/delete', { data: { id: movie.id, title: 'title stuff' } });
+    rerender();
+  };
 
   return (
-    <input type={'text'} defaultValue={title} onChange={(e) => setInput(e.target.value)}>
-      {input}
+    <div>
+      <input type={'text'} defaultValue={title} onChange={(e) => setInput(e.target.value)} />
       <button onClick={() => updateMovie()}>Update</button>
       <button onClick={() => deleteMovie()}>X</button>
-    </input>
+    </div>
   )
 }
 

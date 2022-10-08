@@ -25,4 +25,4 @@ app.patch('/movie/update', patchMovie);
 app.delete('/movie/delete', deleteMovie);
 
 // EVENTS
-app.listen(PORT, `Hosting at http://localhost:${PORT}`);
+app.listen(PORT, () => `Hosting at http://localhost:${PORT}`);
