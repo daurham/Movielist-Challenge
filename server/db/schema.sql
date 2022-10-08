@@ -5,5 +5,4 @@ CREATE TABLE movies(
   title varchar(30)
 );
 
-insert into
 insert into movies (title) values ('star wars');
