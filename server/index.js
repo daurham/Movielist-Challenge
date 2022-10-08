@@ -11,6 +11,7 @@ const {
 const app = express();
 const PORT = 3000;
 const CLIENT = path.join(__dirname, '..', 'client/dist');
+console.log(CLIENT);
 
 // MIDDLEWARE
 app.use(express.json());
@@ -19,9 +20,9 @@ app.use(express.static(CLIENT));
 
 // ROUTES
 app.get('/movies', getMovies);
-app.get('/movie/post', postMovie);
-app.get('/movie/update', patchMovie);
-app.get('/movie/delete', deleteMovie);
+app.post('/movie/post', postMovie);
+app.patch('/movie/update', patchMovie);
+app.delete('/movie/delete', deleteMovie);
 
 // EVENTS
-app.listen(PORT, 'Hosting at http://localhost:' + PORT);
+app.listen(PORT, `Hosting at http://localhost:${PORT}`);

@@ -9,5 +9,5 @@ module.exports = mysql2.createConnection({
   host: 'localhost',
   user: USER,
   database: DATABASE,
-  password: env.PASS;
+  password: PASS
 });
