@@ -9,29 +9,32 @@ const App = () => {
   const getMovies = async () => {
     try {
       const movies = (await axios.get('/movies')).data;
-      setMovies([...movies]);
+      setMovies(movies);
     } catch (err) {
       console.error('Error in Get Movies:', err);
     }
   };
 
   const postMovie = async () => {
-    await axios.post('/movie/post', { title: input });
-    getMovies();
-  }
+    try {
+      await axios.post('/movie/post', { title: input });
+      await getMovies();
+      setInput('');
+    } catch (err) {
+      console.error('Error in Post Movies:', err);
+    }
+  };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+  useEffect(() => { getMovies() }, []);
 
   return (
     <div>
       <h1>MOVIE LIST KING</h1>
-      <input type={'text'} onChange={(e) => setInput(e.target.value)}></input>
-      <button onClick={() => postMovie()}>Add</button>
+      <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+      <button onClick={postMovie}>Add</button>
       <List movies={movies} rerender={getMovies} />
     </div>
   );
-}
+};
 
 export default App;

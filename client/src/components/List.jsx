@@ -4,11 +4,11 @@ import Movie from './Movie';
 const List = ({ movies, rerender }) => {
   return (
     <div>
-      {movies.map((movie, i) => (
-        <Movie key={i} movie={movie} rerender={rerender} />
+      {movies.map((movie) => (
+        <Movie key={movie.id} movie={movie} rerender={rerender} />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default List;

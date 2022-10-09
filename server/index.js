@@ -11,7 +11,6 @@ const {
 const app = express();
 const PORT = 3000;
 const CLIENT = path.join(__dirname, '..', 'client/dist');
-console.log(CLIENT);
 
 // MIDDLEWARE
 app.use(express.json());
